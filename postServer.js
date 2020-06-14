@@ -2,11 +2,15 @@ const http = require('http');
 const url = require('url');
 const axios = require('axios');
 
+// Since the servers are very simple I didn't use express
+
 async function sendResource(url, resource) {
     console.log(`now sending ${resource} to ${url}`);
     return axios.post(url, resource);
 }
 
+// Server for setting the reource
+ 
 const server = http.createServer((req, res) => {
     let returned = undefined;
     let status = 200; 

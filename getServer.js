@@ -4,6 +4,8 @@ const resourceManager = require('./resourceManager');
 
 const resource = new resourceManager.ResourceManager();
 
+// Since the servers are very simple I didn't use express
+
 // main server for call coming from outside
 const getServer = http.createServer((req, res) => {
     let returned = undefined;

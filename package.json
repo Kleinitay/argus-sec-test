@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "dev-get": "node getServer.js",
     "dev-post": "REMOTE_SERVER_URL=localhost:3000 node postServer.js",
     "prod-post": "REMOTE_SERVER_URL=http://ec2-18-195-139-219.eu-central-1.compute.amazonaws.com:3000 node postServer.js"
@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.19.2"
+    "axios": "^0.19.2",
+    "jest": "^26.0.1"
   }
 }
