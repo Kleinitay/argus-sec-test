@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev-get": "node getServer.js",
-    "dev-post": "REMOTE_SERVER_URL=localhost:3000 node postServer.js"
+    "dev-post": "REMOTE_SERVER_URL=localhost:3000 node postServer.js",
+    "prod-post": "REMOTE_SERVER_URL=ec2-18-196-249-214.eu-central-1.compute.amazonaws.com:8080 node postServer.js",
   },
   "author": "",
   "license": "ISC",
