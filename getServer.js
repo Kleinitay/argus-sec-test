@@ -24,6 +24,10 @@ const getServer = http.createServer((req, res) => {
 
 // I am using another server for internal calls
 const postServer = http.createServer((req, res) => {
+    let returned = undefined;
+    let status = 200; 
+    const fullUrl = url.parse(req.url, true);
+    
     if (fullUrl.pathname === '/api/resource/set') {
         var jsonString = '';
 
