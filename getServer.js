@@ -4,6 +4,7 @@ const resourceManager = require('./resourceManager');
 
 const resource = new resourceManager.ResourceManager();
 
+//main server for call coming from outside
 const getServer = http.createServer((req, res) => {
     let returned = undefined;
     let status = 200; 
@@ -17,6 +18,12 @@ const getServer = http.createServer((req, res) => {
         returned = JSON.stringify(returnResource);
     }
 
+    res.statusCode = status;
+    res.end(returned);
+});
+
+// I am using another server for internal calls
+const postServer = http.createServer((req, res) => {
     if (fullUrl.pathname === '/api/resource/set') {
         var jsonString = '';
 
@@ -32,9 +39,7 @@ const getServer = http.createServer((req, res) => {
             returned = "resource set";
         });
     }
-
-    res.statusCode = status;
-    res.end(returned);
 });
 
+getServer.listen(8080);
 getServer.listen(3000);
