@@ -4,15 +4,15 @@ const axios = require('axios');
 
 async function sendResource(url, resource) {
     console.log(`now sending ${resource} to ${url}`);
-    return axios.post(url, {data: resource});
+    return axios.post(url, resource);
 }
 
 const server = http.createServer((req, res) => {
-    let returned = "";
+    let returned = undefined;
     let status = 200; 
     const remoteServerUrl = `${process.env.REMOTE_SERVER_URL}/api/resource/set`;
     const fullUrl = url.parse(req.url, true);
-    if (fullUrl.pathname === '/api/resource') {
+    if (fullUrl.pathname === '/api/resource' && req.method === 'POST') {
         var jsonString = '';
 
         req.on('data', function (data) {
@@ -29,7 +29,6 @@ const server = http.createServer((req, res) => {
             } else {
                 returned = "error occured";
             }
-            
         });
     }
 

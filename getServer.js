@@ -4,14 +4,14 @@ const resourceManager = require('./resourceManager');
 
 const resource = new resourceManager.ResourceManager();
 
-//main server for call coming from outside
+// main server for call coming from outside
 const getServer = http.createServer((req, res) => {
     let returned = undefined;
     let status = 200; 
     const fullUrl = url.parse(req.url, true);
     console.log("we got request from url ", fullUrl);
 
-    if (fullUrl.pathname === '/api/resource') {
+    if (fullUrl.pathname === '/api/resource' && req.method === 'GET') {
         const returnResource = resource.getResource();
         console.log("getting resource ", returnResource);
         res.setHeader('Content-Type', 'application/json');
@@ -22,13 +22,13 @@ const getServer = http.createServer((req, res) => {
     res.end(returned);
 });
 
-// I am using another server for internal calls
+// Another server for internal calls
 const postServer = http.createServer((req, res) => {
     let returned = undefined;
     let status = 200; 
     const fullUrl = url.parse(req.url, true);
-    
-    if (fullUrl.pathname === '/api/resource/set') {
+
+    if (fullUrl.pathname === '/api/resource/set' && req.method === 'POST') {
         var jsonString = '';
 
         req.on('data', function (data) {
@@ -38,11 +38,15 @@ const postServer = http.createServer((req, res) => {
         req.on('end', function () {
             const resourceToAdd = JSON.parse(jsonString);
             console.log(console.log('we got an request with body: ', 
-            resourceToAdd));
+                resourceToAdd));
             resource.setResource(resourceToAdd);
+            console.log("resource is set");
             returned = "resource set";
         });
     }
+
+    res.statusCode = status;
+    res.end(returned);
 });
 
 getServer.listen(8080);
