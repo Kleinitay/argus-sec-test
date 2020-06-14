@@ -42,4 +42,4 @@ const postServer = http.createServer((req, res) => {
 });
 
 getServer.listen(8080);
-getServer.listen(3000);
+postServer.listen(3000);
